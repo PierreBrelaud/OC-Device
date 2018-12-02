@@ -19,19 +19,21 @@ si = SI7006A20(py)
 
 wifi = WiFi()
 
-print("Temperature: " + str(si.temperature())+ " deg C and Relative Humidity: " + str(si.humidity()) + " %RH")
-print("Dew point: "+ str(si.dew_point()) + " deg C")
+
 
 #print (WiFi.connectwifi('SSID','pwd'))
 
 # Syntaxe pour envoyer un paquet MQTT à IBM Cloud
-client = MQTTClient("d:"+IBMorgID+":"+deviceType+":"+deviceID, IBMorgID +".messaging.internetofthings.ibmcloud.com", user="use-token-auth", password=deviceToken, port=1883)
-client.connect();
+#client = MQTTClient("d:"+IBMorgID+":"+deviceType+":"+deviceID, IBMorgID +".messaging.internetofthings.ibmcloud.com", user="use-token-auth", password=deviceToken, port=1883)
+#client.connect();
 while True:
     print("Sending")
-    mqttMsg = '{'
-    mqttMsg = mqttMsg + '"t":' + str(si.temperature())
-    mqttMsg = mqttMsg + '}'
-    print(mqttMsg)
-    client.publish(topic="iot-2/evt/data/fmt/json", msg=mqttMsg)
+    print("Temperature: " + str(si.temperature())+ " deg C")
+    print("Relative Humidity: " + str(si.humidity()) + " %RH")
+    print("Dew point: "+ str(si.dew_point()) + " deg C")
+    #mqttMsg = '{'
+    #mqttMsg = mqttMsg + '"t":' + str(si.temperature())
+    #mqttMsg = mqttMsg + '}'
+    #print(mqttMsg)
+    #client.publish(topic="iot-2/evt/data/fmt/json", msg=mqttMsg)
     time.sleep(1)
