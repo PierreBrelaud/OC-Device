@@ -23,7 +23,6 @@ class WiFi:
                 """print('Network found!')"""
                 wlan.connect(net.ssid, auth=(net.sec, pwd), timeout=5000)
                 while not wlan.isconnected():
-                    print("test")
                     machine.idle() # save power while waiting
                     status='Connected'
                 """print('WLAN connection succeeded!')"""
