@@ -21,13 +21,13 @@ wifi = WiFi()
 
 
 
-print (WiFi.connectwifi('Livebox-2CB1','5432 F01F 3EC5 6E7E C5180 451A '))
+#print (WiFi.connectwifi('freebox_jake','88C7D8BF5C '))
 
 # Syntaxe pour envoyer un paquet MQTT à IBM Cloud
 client = MQTTClient("d:"+IBMorgID+":"+deviceType+":"+deviceID, IBMorgID +".messaging.internetofthings.ibmcloud.com", user="use-token-auth", password=deviceToken, port=1883)
-#client.connect();
+client.connect();
 while True:
-    print("Sending")
+    print("Sensding")
     print("Temperature: " + str(si.temperature())+ " deg C")
     print("Relative Humidity: " + str(si.humidity()) + " %RH")
     print("Dew point: "+ str(si.dew_point()) + " deg C")
@@ -35,5 +35,5 @@ while True:
     mqttMsg = mqttMsg + '"t":' + str(si.temperature())
     mqttMsg = mqttMsg + '}'
     print(mqttMsg)
-    #client.publish(topic="iot-2/evt/data/fmt/json", msg=mqttMsg)
+    client.publish(topic="iot-2/evt/data/fmt/json", msg=mqttMsg)
     time.sleep(1)
